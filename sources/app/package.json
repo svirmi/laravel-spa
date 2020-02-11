@@ -1,36 +1,21 @@
 {
-    "devDependencies": {
-        "@babel/plugin-transform-runtime": "^7.4.4",
-        "@babel/runtime": "^7.4.5",
-        "@symfony/webpack-encore": "^0.27.0",
-        "babel-eslint": "^10.0.2",
-        "core-js": "^3.0.0",
-        "eslint": "^5.16.0",
-        "eslint-loader": "^2.1.2",
-        "eslint-plugin-vue": "^5.2.2",
-        "vue-loader": "^15.7.0",
-        "vue-template-compiler": "^2.6.10",
-        "webpack-notifier": "^1.6.0"
-    },
-    "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress",
-        "csfix": "eslint assets/vue --ext .js,.vue, --fix"
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
-    "dependencies": {
-        "axios": "^0.19.0",
-        "vue": "^2.6.10",
-        "vue-router": "^3.0.6",
-        "vuex": "^3.1.1"
-    },
-    "browserslist": [
-        "> 0.5%",
-        "last 2 versions",
-        "Firefox ESR",
-        "not dead"
-    ]
+    "devDependencies": {
+        "axios": "^0.19",
+        "cross-env": "^5.1",
+        "laravel-mix": "^5.0.1",
+        "lodash": "^4.17.13",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.15.2",
+        "sass-loader": "^8.0.0"
+    }
 }

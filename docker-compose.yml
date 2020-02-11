@@ -11,7 +11,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   app:
-    image: thecodingmachine/php:7.3-v2-apache-node10
+    image: thecodingmachine/php:7.4-v3-apache-node10
     labels:
       - traefik.enable=true
       - traefik.backend=app
@@ -21,9 +21,9 @@ services:
       PHP_EXTENSION_XDEBUG: "1"
       PHP_INI_MEMORY_LIMIT: "1G"
       # Symfony
-      APP_ENV: "dev"
-      APP_SECRET: "8d2a5c935d8ef1c0e2b751147382bc75"
-      DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
+#      APP_ENV: "dev"
+#      APP_SECRET: "8d2a5c935d8ef1c0e2b751147382bc75"
+#      DATABASE_URL: "mysql://$MYSQL_USER:$MYSQL_PASSWORD@mysql:3306/$MYSQL_DATABASE"
     volumes:
       - ./sources/app:/var/www/html:rw
 
@@ -35,7 +35,7 @@ services:
       MYSQL_USER: "$MYSQL_USER"
       MYSQL_PASSWORD: "$MYSQL_PASSWORD"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - ./services/mysql/mysql_data:/var/lib/mysql
       - ./services/mysql/utf8mb4.cnf:/etc/mysql/conf.d/utf8mb4.cnf:ro
 
   mysql_tests:
