@@ -5,3 +5,6 @@ $ composer install
 $ yarn install
 $ yarn dev
 ```
+http://app.localhost/
+
+http://phpmyadmin.app.localhost/ 
