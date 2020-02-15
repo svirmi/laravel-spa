@@ -17,8 +17,52 @@ class ContactsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->post('api/contacts', ['name' => 'Test Name']);
+        $this->post('api/contacts', [
+            'name'  => 'Test Name',
+            'email' => 'test@test.net',
+            'birthday' => '05/14/1988',
+            'company'  => 'A Company Name'
+        ]);
 
-        $this->assertCount(1, Contact::all());
+        $contact = Contact::first();
+
+        $this->assertEquals('Test Name', $contact->name);
+        $this->assertEquals('test@test.net', $contact->email);
+        $this->assertEquals('05/14/1988', $contact->birthday);
+        $this->assertEquals('A Company Name', $contact->company);
+    }
+
+    /**
+     * @test
+     */
+    public function a_name_is_requred()
+    {
+        $response = $this->post('api/contacts', [
+            'email' => 'test@test.net',
+            'birthday' => '05/14/1988',
+            'company'  => 'A Company Name'
+        ]);
+
+        $contact = Contact::first();
+
+        $response->assertSessionHasErrors('name');
+        $this->assertCount(0,Contact::all());           // no record saved is no name provided
+    }
+
+    /**
+     * @test
+     */
+    public function an_email_is_requred()
+    {
+        $response = $this->post('api/contacts', [
+            'name'      => 'Test Name',
+            'birthday'  => '05/14/1988',
+            'company'   => 'A Company Name'
+        ]);
+
+        $contact = Contact::first();
+
+        $response->assertSessionHasErrors('email');
+        $this->assertCount(0,Contact::all());           // no record saved is no name provided
     }
 }
