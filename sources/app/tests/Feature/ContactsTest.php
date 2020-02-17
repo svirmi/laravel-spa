@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Contact;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ContactsTest extends TestCase
@@ -37,16 +36,10 @@ class ContactsTest extends TestCase
      */
     public function a_name_is_requred()
     {
-        $response = $this->post('api/contacts', [
-            'email' => 'test@test.net',
-            'birthday' => '05/14/1988',
-            'company'  => 'A Company Name'
-        ]);
-
-        $contact = Contact::first();
+        $response = $this->post('api/contacts', array_merge($this->data(), ['name' => '']));
 
         $response->assertSessionHasErrors('name');
-        $this->assertCount(0,Contact::all());           // no record saved is no name provided
+        $this->assertCount(0,Contact::all());           // no record saved if no name provided
     }
 
     /**
@@ -54,15 +47,19 @@ class ContactsTest extends TestCase
      */
     public function an_email_is_requred()
     {
-        $response = $this->post('api/contacts', [
-            'name'      => 'Test Name',
-            'birthday'  => '05/14/1988',
-            'company'   => 'A Company Name'
-        ]);
-
-        $contact = Contact::first();
+        $response = $this->post('api/contacts', array_merge($this->data(), ['email' => '']));
 
         $response->assertSessionHasErrors('email');
-        $this->assertCount(0,Contact::all());           // no record saved is no name provided
+        $this->assertCount(0,Contact::all());           // no record saved if no email provided
+    }
+
+    private function data()
+    {
+        return [
+            'name'  => 'Test Name',
+            'email' => 'test@test.net',
+            'birthday' => '05/14/1988',
+            'company'  => 'A Company Name'
+        ];
     }
 }
