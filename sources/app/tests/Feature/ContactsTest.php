@@ -42,6 +42,16 @@ class ContactsTest extends TestCase
         });
     }
 
+    /**
+     * @test
+     */
+    public function email_must_be_a_valid_emai()
+    {
+        $response = $this->post('api/contacts', array_merge($this->data(), ['email' => 'NOT an EMAIL']));
+
+        $response->assertSessionHasErrors('email');
+        $this->assertCount(0,Contact::all());
+    }
 
     /**
      * @test
