@@ -50,6 +50,23 @@ class ContactsTest extends TestCase
     /**
      * @test
      */
+    public function a_contact_can_be_patched()
+    {
+        $contact = factory(Contact::class)->create();
+
+        $response = $this->patch('/api/contacts/' . $contact->id, $this->data());
+
+        $contact = $contact->fresh();
+
+        $this->assertEquals('Test Name', $contact->name);
+        $this->assertEquals('test@test.net', $contact->email);
+        $this->assertEquals('05/14/1988', $contact->birthday->format('m/d/Y'));
+        $this->assertEquals('A Company Name', $contact->company);
+    }
+
+    /**
+     * @test
+     */
     public function fields_are_required()
     {
         collect(['name','email','birthday','company'])->each(function ($field){
