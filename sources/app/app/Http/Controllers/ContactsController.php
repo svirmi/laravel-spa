@@ -9,14 +9,7 @@ class ContactsController extends Controller
 {
     public function store()
     {
-        $data = \request()->validate([
-            'name'      => 'required',
-            'email'     => 'required|email',
-            'birthday'  => 'required',
-            'company'   => 'required'
-        ]);
-
-        Contact::create($data);
+        Contact::create($this->validate_data());
     }
 
     public function show(Contact $contact)
@@ -26,11 +19,16 @@ class ContactsController extends Controller
 
     public function update(Contact $contact)
     {
-        $contact->update([
-            'name'      => \request('name'),
-            'email'     => \request('email'),
-            'birthday'  => \request('birthday'),
-            'company'   => \request('company'),
+        $contact->update($this->validate_data());
+    }
+
+    private function validate_data()
+    {
+        return \request()->validate([
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'birthday'  => 'required',
+            'company'   => 'required'
         ]);
     }
 }
