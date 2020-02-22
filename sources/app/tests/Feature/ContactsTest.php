@@ -67,6 +67,20 @@ class ContactsTest extends TestCase
     /**
      * @test
      */
+    public function a_contact_can_be_deleted()
+    {
+        $contact = factory(Contact::class)->create();
+
+        $response = $this->delete('/api/contacts/' . $contact->id);
+
+        $contact = $contact->fresh();
+
+        $this->assertCount(0, Contact::all());
+    }
+
+    /**
+     * @test
+     */
     public function fields_are_required()
     {
         collect(['name','email','birthday','company'])->each(function ($field){
