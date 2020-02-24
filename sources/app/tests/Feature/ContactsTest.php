@@ -67,6 +67,17 @@ class ContactsTest extends TestCase
     /**
      * @test
      */
+    public function an_unauthenticated_user_shoild_be_redirected_to_login()
+    {
+        $response = $this->post('api/contacts', $this->data());
+
+        $response->assertRedirect('/login');
+        $this->assertCount(0, Contact::all());
+    }
+
+    /**
+     * @test
+     */
     public function a_contact_can_be_deleted()
     {
         $contact = factory(Contact::class)->create();
