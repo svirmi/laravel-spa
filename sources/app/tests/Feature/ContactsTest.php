@@ -27,7 +27,7 @@ class ContactsTest extends TestCase
      */
     public function an_authenticated_user_can_add_contact()
     {
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
 
         $this->post('api/contacts', $this->data());
 
@@ -44,7 +44,7 @@ class ContactsTest extends TestCase
      */
     public function a_contact_can_be_retrieved()
     {
-        $contact = factory(Contact::class)->create();
+        $contact = factory(Contact::class)->create(['user_id' => $this->user->id]);
 
         $response = $this->get('/api/contacts/' . $contact->id . '?api_token=' . $this->user->api_token);
 
@@ -54,6 +54,20 @@ class ContactsTest extends TestCase
             'birthday'  => $contact->birthday,
             'company'   => $contact->company
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function only_the_users_contacts_can_be_retrieved()
+    {
+        $contact = factory(Contact::class)->create(['user_id' => $this->user->id]);
+
+        $anotherUser = factory(User::class)->create();
+
+        $response = $this->get('/api/contacts/' . $contact->id . '?api_token=' . $anotherUser->api_token);
+
+        $response->assertStatus(403);
     }
 
     /**
@@ -82,6 +96,22 @@ class ContactsTest extends TestCase
 
         $response->assertRedirect('/login');
         $this->assertCount(0, Contact::all());
+    }
+
+    /**
+     * @test
+     */
+    public function a_list_of_contacts_can_be_fetched_for_an_authenticated_user()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+
+        $contact1 = factory(Contact::class)->create(['user_id' => $user1->id]);
+        $contact2 = factory(Contact::class)->create(['user_id' => $user2->id]);
+
+        $response1 = $this->get('/api/contacts?api_token=' . $user1->api_token);
+
+        $response1->assertJsonCount(1)->assertJson([['id' => $contact1->id]]);
     }
 
     /**
