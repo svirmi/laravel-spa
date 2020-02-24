@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Contact;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -10,17 +11,25 @@ use Tests\TestCase;
 class ContactsTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->create();
+    }
+
+
     /**
      * @test
      */
-    public function a_contact_can_be_added()
+    public function an_authenticated_user_can_add_contact()
     {
-        $this->post('api/contacts', [
-            'name'  => 'Test Name',
-            'email' => 'test@test.net',
-            'birthday' => '05/14/1988',
-            'company'  => 'A Company Name'
-        ]);
+        $this->withoutExceptionHandling();
+
+        $this->post('api/contacts', $this->data());
 
         $contact = Contact::first();
 
@@ -37,7 +46,7 @@ class ContactsTest extends TestCase
     {
         $contact = factory(Contact::class)->create();
 
-        $response = $this->get('/api/contacts/' . $contact->id);
+        $response = $this->get('/api/contacts/' . $contact->id . '?api_token=' . $this->user->api_token);
 
         $response->assertJson([
             'name'      => $contact->name,
@@ -69,7 +78,7 @@ class ContactsTest extends TestCase
      */
     public function an_unauthenticated_user_shoild_be_redirected_to_login()
     {
-        $response = $this->post('api/contacts', $this->data());
+        $response = $this->post('api/contacts', array_merge($this->data(), ['api_token' => '']));
 
         $response->assertRedirect('/login');
         $this->assertCount(0, Contact::all());
@@ -82,7 +91,7 @@ class ContactsTest extends TestCase
     {
         $contact = factory(Contact::class)->create();
 
-        $response = $this->delete('/api/contacts/' . $contact->id);
+        $response = $this->delete('/api/contacts/' . $contact->id, ['api_token' => $this->user->api_token]);
 
         $contact = $contact->fresh();
 
@@ -155,7 +164,8 @@ class ContactsTest extends TestCase
             'name'      => 'Test Name',
             'email'     => 'test@test.net',
             'birthday'  => '05/14/1988',
-            'company'   => 'A Company Name'
+            'company'   => 'A Company Name',
+            'api_token' => $this->user->api_token,
         ];
     }
 }
