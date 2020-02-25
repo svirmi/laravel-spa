@@ -11,7 +11,7 @@ class ContactsController extends Controller
     {
         $this->authorize('viewAny', Contact::class);
 
-        return request()->user()->contacts;
+        return ContactResource::collection(request()->user()->contacts);
     }
 
     public function store()

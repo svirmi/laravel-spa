@@ -130,7 +130,11 @@ class ContactsTest extends TestCase
 
         $response1 = $this->get('/api/contacts?api_token=' . $user1->api_token);
 
-        $response1->assertJsonCount(1)->assertJson([['id' => $contact1->id]]);
+        $response1->assertJsonCount(1)->assertJson([
+            'data' => [
+                ['contact_id' => $contact1->id]
+            ]
+        ]);
     }
 
     /**
