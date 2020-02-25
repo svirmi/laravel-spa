@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contact;
+use \App\Http\Resources\Contact as ContactResource;
 
 class ContactsController extends Controller
 {
@@ -24,7 +25,7 @@ class ContactsController extends Controller
     {
         $this->authorize('view', $contact);
 
-        return $contact;
+        return new ContactResource($contact);
     }
 
     public function update(Contact $contact)
