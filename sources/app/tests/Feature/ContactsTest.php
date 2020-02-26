@@ -6,6 +6,7 @@ use App\Contact;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ContactsTest extends TestCase
@@ -38,11 +39,14 @@ class ContactsTest extends TestCase
         $this->assertEquals('05/14/1988', $contact->birthday->format('m/d/Y'));
         $this->assertEquals('A Company Name', $contact->company);
 
-        $response->assertStatus(201);
+        $response->assertStatus(Response::HTTP_CREATED);
         $response->assertJson([
             'data' => [
-                'contact_id' => $contact->id
-            ]
+                'contact_id' => $contact->id,
+                'links' => [
+                    'self' => url('/contacts/' . $contact->id)
+                ]
+            ],
         ]);
     }
 
@@ -110,7 +114,7 @@ class ContactsTest extends TestCase
         $response = $this->patch('/api/contacts/' . $contact->id,
                         array_merge($this->data(), ['api_token' => $anotherUser->api_token])
                     );
-        $response->assertStatus(403);
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /**
@@ -170,7 +174,7 @@ class ContactsTest extends TestCase
         $response = $this->delete('/api/contacts/' . $contact->id,
             array_merge($this->data(), ['api_token' => $this->user->api_token])
         );
-        $response->assertStatus(403);
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /**

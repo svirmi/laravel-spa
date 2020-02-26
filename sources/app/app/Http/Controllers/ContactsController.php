@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contact;
 use \App\Http\Resources\Contact as ContactResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContactsController extends Controller
 {
@@ -20,7 +21,7 @@ class ContactsController extends Controller
 
         $contact = request()->user()->contacts()->create($this->validate_data());
 
-        return (new ContactResource($contact))->response()->setStatusCode(201);
+        return (new ContactResource($contact))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
     public function show(Contact $contact)
