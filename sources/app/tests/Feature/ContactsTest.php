@@ -29,7 +29,7 @@ class ContactsTest extends TestCase
     {
 //        $this->withoutExceptionHandling();
 
-        $this->post('api/contacts', $this->data());
+        $response = $this->post('api/contacts', $this->data());
 
         $contact = Contact::first();
 
@@ -37,6 +37,13 @@ class ContactsTest extends TestCase
         $this->assertEquals('test@test.net', $contact->email);
         $this->assertEquals('05/14/1988', $contact->birthday->format('m/d/Y'));
         $this->assertEquals('A Company Name', $contact->company);
+
+        $response->assertStatus(201);
+        $response->assertJson([
+            'data' => [
+                'contact_id' => $contact->id
+            ]
+        ]);
     }
 
     /**
