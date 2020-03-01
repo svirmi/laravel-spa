@@ -100,6 +100,16 @@ class ContactsTest extends TestCase
         $this->assertEquals('test@test.net', $contact->email);
         $this->assertEquals('05/14/1988', $contact->birthday->format('m/d/Y'));
         $this->assertEquals('A Company Name', $contact->company);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJson([
+            'data' => [
+                'contact_id' => $contact->id,
+                'links' => [
+                    'self' => $contact->path()
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -160,6 +170,8 @@ class ContactsTest extends TestCase
         $contact = $contact->fresh();
 
         $this->assertCount(0, Contact::all());
+
+        $response->assertStatus(Response::HTTP_NO_CONTENT);
     }
 
     /**

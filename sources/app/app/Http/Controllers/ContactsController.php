@@ -36,6 +36,9 @@ class ContactsController extends Controller
         $this->authorize('update', $contact);
 
         $contact->update($this->validate_data());
+
+        return (new ContactResource($contact))->response()->setStatusCode(Response::HTTP_OK);
+
     }
 
     public function destroy(Contact $contact)
@@ -43,6 +46,8 @@ class ContactsController extends Controller
         $this->authorize('delete', $contact);
 
         $contact->delete();
+
+        return \response([], Response::HTTP_NO_CONTENT);
     }
 
     private function validate_data()
