@@ -1915,6 +1915,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App"
 });
@@ -19553,11 +19586,79 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [_c("h1", [_vm._v("Hello")]), _vm._v(" "), _c("router-view")],
-    1
-  )
+  return _c("div", { staticClass: "h-screen bg-white" }, [
+    _c("div", { staticClass: "flex" }, [
+      _c(
+        "nav",
+        { staticClass: "bg-gray-200 w-48 h-screen border-r-2 border-gray-400" },
+        [
+          _c("router-link", { attrs: { to: "/" } }, [
+            _c("p", { staticClass: "text-blue-600 text-center text-xl pt-2" }, [
+              _vm._v("Menu")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "pl-4 flex flex-col" },
+            [
+              _c(
+                "p",
+                {
+                  staticClass: "text-gray-500 uppercase font-bold pt-12 text-xs"
+                },
+                [_vm._v("Create")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "hover:text-blue-600", attrs: { to: "/" } },
+                [_vm._v("\n                    + Add New\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "text-gray-500 uppercase font-bold pt-12 text-xs"
+                },
+                [_vm._v("General")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "hover:text-blue-600", attrs: { to: "/" } },
+                [_vm._v("\n                    Contacts\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "hover:text-blue-600", attrs: { to: "/" } },
+                [_vm._v("\n                    Birthdays\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "p",
+                {
+                  staticClass: "text-gray-500 uppercase font-bold pt-12 text-xs"
+                },
+                [_vm._v("Settings")]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                { staticClass: "hover:text-blue-600", attrs: { to: "/" } },
+                [_vm._v("\n                    Logout\n                ")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("div", [_c("div"), _vm._v(" "), _c("div", [_c("router-view")], 1)])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
