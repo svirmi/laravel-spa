@@ -2008,6 +2008,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactsCreate"
 });
@@ -19806,7 +19823,81 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Inner content")])])
+    return _c("div", [
+      _c("form", [
+        _c("div", { staticClass: "relative pb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                "text-blue-500 pt-2 uppercase text-xs font-bold absolute",
+              attrs: { for: "name" }
+            },
+            [_vm._v("Contact Name")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
+            attrs: { id: "name", type: "text", placeholder: "Contact Name" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "relative pb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                "text-blue-500 pt-2 uppercase text-xs font-bold absolute",
+              attrs: { for: "name" }
+            },
+            [_vm._v("Contact Name")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
+            attrs: { id: "name", type: "text", placeholder: "Contact Name" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "relative pb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                "text-blue-500 pt-2 uppercase text-xs font-bold absolute",
+              attrs: { for: "name" }
+            },
+            [_vm._v("Contact Name")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
+            attrs: { id: "name", type: "text", placeholder: "Contact Name" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "relative pb-4" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                "text-blue-500 pt-2 uppercase text-xs font-bold absolute",
+              attrs: { for: "name" }
+            },
+            [_vm._v("Contact Name")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
+            attrs: { id: "name", type: "text", placeholder: "Contact Name" }
+          })
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
