@@ -19709,12 +19709,7 @@ var render = function() {
         [
           _vm._m(0),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "flex flex-column overflow-y-hidden flex-1" },
-            [_c("router-view", { staticClass: "p-6 overflow-x-hidden" })],
-            1
-          )
+          _c("div", {}, [_c("router-view", { staticClass: "p-6" })], 1)
         ]
       )
     ])

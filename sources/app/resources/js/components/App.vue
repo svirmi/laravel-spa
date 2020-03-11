@@ -35,8 +35,8 @@
                     </div>
                 </div>
 
-                <div class="flex flex-column overflow-y-hidden flex-1">
-                    <router-view class="p-6 overflow-x-hidden"></router-view>
+                <div class="">
+                    <router-view class="p-6"></router-view>
                 </div>
 
             </div>
