@@ -1,10 +1,10 @@
 <template>
     <div>
         <form>
-            <InputField name="name" label="Contact Name" placeholder="Contact Name" />
-            <InputField name="email" label="Contact Email" placeholder="Contact Email" />
-            <InputField name="company" label="Company" placeholder="Company" />
-            <InputField name="birthday" label="Birthday" placeholder="MM/DD/YYYY" />
+            <InputField @update:field="form.name = $event" name="name" label="Contact Name" placeholder="Contact Name" />
+            <InputField @update:field="form.email = $event" name="email" label="Contact Email" placeholder="Contact Email" />
+            <InputField @update:field="form.company = $event" name="company" label="Company" placeholder="Company" />
+            <InputField @update:field="form.birthday = $event" name="birthday" label="Birthday" placeholder="MM/DD/YYYY" />
 
             <div class="flex justify-end mb-4 pb-2">
                 <button class="rounded-full py-2 px-4 hover:border-red-500 border border-gray-400 text-red-500 mr-2">Cancel</button>
@@ -20,6 +20,16 @@
         name: "ContactsCreate",
         components: {
             InputField
+        },
+        data: function() {
+            return {
+                form: {
+                    'name': '',
+                    'email': '',
+                    'company': '',
+                    'birthday': ''
+                }
+            }
         }
     }
 </script>
