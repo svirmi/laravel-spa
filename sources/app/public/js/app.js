@@ -2025,6 +2025,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ContactsCreate"
 });
@@ -19890,6 +19895,26 @@ var staticRenderFns = [
               "pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400",
             attrs: { id: "name", type: "text", placeholder: "Contact Name" }
           })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex justify-end mb-4 pb-2" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded-full py-2 px-4 hover:border-red-500 border border-gray-400 text-red-500 mr-2"
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "rounded-full bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-gray-400 text-white"
+            },
+            [_vm._v("Add New Contact")]
+          )
         ])
       ])
     ])

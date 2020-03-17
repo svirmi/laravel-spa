@@ -3,7 +3,7 @@ $ docker-compose up -d
 $ docker-compose exec app bash # executing bash inside app service
 $ composer install
 $ yarn install
-$ yarn dev
+$ yarn dev || yarn watch
 ```
 http://app.localhost/
 
