@@ -30,7 +30,7 @@ class ContactsTest extends TestCase
     {
 //        $this->withoutExceptionHandling();
 
-        $response = $this->post('api/contacts', $this->data());
+        $response = $this->post('/api/contacts', $this->data());
 
         $contact = Contact::first();
 

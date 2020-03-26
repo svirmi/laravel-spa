@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form>
+        <form @submit.prevent="submitForm">
             <InputField @update:field="form.name = $event" name="name" label="Contact Name" placeholder="Contact Name" />
             <InputField @update:field="form.email = $event" name="email" label="Contact Email" placeholder="Contact Email" />
             <InputField @update:field="form.company = $event" name="company" label="Company" placeholder="Company" />
@@ -29,6 +29,17 @@
                     'company': '',
                     'birthday': ''
                 }
+            }
+        },
+        methods: {
+            submitForm: function () {
+                axios.post('/api/contacts', this.form)
+                    .then(response => {
+
+                    })
+                    .catch(errors => {
+
+                    });
             }
         }
     }
