@@ -9,6 +9,7 @@
             type="text"
             class="pt-8 text-gray-900 w-full border-b pb-2 focus:outline-none focus:border-blue-400"
         >
+        <p class="text-red-600 text-sm" v-text="errorMessage(name)">Error</p>
     </div>
 </template>
 
@@ -16,7 +17,7 @@
     export default {
         name: "InputField",
         props: [
-            'name', 'label', 'placeholder'
+            'name', 'label', 'placeholder', 'errors'
         ],
         data: function() {
             return {
@@ -26,6 +27,14 @@
         methods: {
             updateField: function () {
                 this.$emit('update:field', this.value)
+            },
+            errorMessage: function (field) {
+
+                field = 'data.' + field;
+
+                if(this.errors && this.errors[field] && this.errors[field].length > 0) {
+                    return this.errors[field][0];
+                }
             }
         }
     }
