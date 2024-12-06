@@ -12,6 +12,7 @@ services:
 
   app:
     image: thecodingmachine/php:7.4-v3-apache-node10
+    container_name: app
     labels:
       - traefik.enable=true
       - traefik.backend=app
